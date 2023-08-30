@@ -14,7 +14,9 @@ instance.interceptors.response.use(
     return res.data;
   },
   (err) => {
-    return Promise.reject(err);
+    console.error(err);
+    alert("요청에 실패하였습니다.");
+    window.history.back();
   },
 );
 
