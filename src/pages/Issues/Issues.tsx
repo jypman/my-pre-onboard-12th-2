@@ -39,7 +39,7 @@ export const Issues = () => {
     observer.observe(scrollTargetFooter.current);
 
     return () => observer && observer.disconnect();
-  }, [scrollTargetFooter, onIntersect, isNewIssuesLoading]);
+  }, [scrollTargetFooter.current, onIntersect]);
 
   return (
     <StyledIssues>
