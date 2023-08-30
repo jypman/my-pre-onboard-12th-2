@@ -10,8 +10,10 @@ export const useIssues = () => {
   useEffect(() => {
     setIsNewIssuesLoading(true);
     getIssues(page.current, perPage).then((data: IResIssue[]) => {
-      setIssues(data);
-      setIsNewIssuesLoading(false);
+      if (data && data.length > 0) {
+        setIssues(data);
+        setIsNewIssuesLoading(false);
+      }
     });
   }, []);
 

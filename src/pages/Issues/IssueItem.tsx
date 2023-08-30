@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 interface IssueListProps {
   title: string;
@@ -15,8 +16,10 @@ export const IssueItem = ({
   updatedAt,
   comments,
 }: IssueListProps) => {
+  const navigate = useNavigate();
+
   return (
-    <StyledIssueList>
+    <StyledIssueList onClick={() => navigate(`/issues/${number}`)}>
       <div>
         <div className="title">
           #{number} {title}
@@ -31,6 +34,7 @@ export const IssueItem = ({
 };
 
 const StyledIssueList = styled.section`
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
