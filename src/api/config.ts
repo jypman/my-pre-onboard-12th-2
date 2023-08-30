@@ -1,4 +1,4 @@
-export const BASE_URL = "https://github.com/";
+export const BASE_URL = "https://api.github.com/";
 export const API = {
-  GET_ISSUES: "/facebook/react/issues",
+  GET_ISSUES: "/repos/facebook/react/issues",
 };

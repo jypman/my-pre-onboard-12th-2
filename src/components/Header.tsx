@@ -13,5 +13,6 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: center;
   padding: 20px 0;
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.05);
+  font-weight: 700;
+  font-size: 25px;
 `;
