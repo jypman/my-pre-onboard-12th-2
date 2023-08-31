@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { useIssues } from "./useIssues";
-import styled from "styled-components";
 import { getIssues } from "../../api/issues";
 import { Loading } from "../../components/Loading";
 import { IssueList } from "./IssueList";
@@ -41,14 +40,13 @@ export const Issues = () => {
     return () => observer && observer.disconnect();
   }, [scrollTargetFooter.current, onIntersect]);
 
+  if (issues.length === 0 && !isNewIssuesLoading)
+    return <main>이슈 목록이 없습니다.</main>;
+
   return (
-    <StyledIssues>
+    <main>
       <IssueList issues={issues} />
       {isNewIssuesLoading ? <Loading /> : <div ref={scrollTargetFooter} />}
-    </StyledIssues>
+    </main>
   );
 };
-
-const StyledIssues = styled.main`
-  //
-`;

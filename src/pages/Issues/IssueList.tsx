@@ -11,8 +11,6 @@ export const IssueList = ({ issues }: IssueListProps) => {
   const indexWhereAdsArePlaced = 4;
   const dateFormat = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
 
-  if (issues.length === 0) return null;
-
   return (
     <section>
       {issues.reduce((acc: React.ReactElement[], issue: IResIssue, index) => {
