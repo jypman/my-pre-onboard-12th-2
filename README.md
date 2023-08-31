@@ -4,7 +4,7 @@
 박진영
 
 ## 배포 주소
-
+https://my-pre-onboard-12th-2-8.vercel.app/
 
 ## 실행 방법
 - `git clone https://github.com/jypman/my-pre-onboard-12th-2-8.git ./` : 프로젝트 내려받기
