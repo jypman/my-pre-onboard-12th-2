@@ -16,7 +16,6 @@ instance.interceptors.response.use(
   (err) => {
     console.error(err);
     alert("요청에 실패하였습니다.");
-    window.history.back();
   },
 );
 

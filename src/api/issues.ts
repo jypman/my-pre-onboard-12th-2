@@ -23,6 +23,8 @@ export const getIssues = (
   );
 };
 
-export const getDetailedIssue = (issueNumber: number): Promise<IResIssue> => {
+export const getDetailedIssue = (
+  issueNumber: number | string,
+): Promise<IResIssue> => {
   return instance.get(`${API.ISSUES}/${issueNumber}`);
 };

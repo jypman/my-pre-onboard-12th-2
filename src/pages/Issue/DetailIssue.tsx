@@ -8,10 +8,16 @@ import { Loading } from "../../components/Loading";
 
 export const DetailIssue = () => {
   const { id } = useParams();
-  const { detailIssue } = useDetailIssue(Number(id as string));
+  const { detailIssue, isDetailIssueLoading } = useDetailIssue(id as string);
   const dateFormat = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
 
-  if (!detailIssue) return <Loading />;
+  if (isDetailIssueLoading) return <Loading />;
+  if (!detailIssue)
+    return (
+      <StyledNotFoundDetailIssue>
+        <div>해당 이슈를 찾을 수 없습니다.</div>
+      </StyledNotFoundDetailIssue>
+    );
 
   return (
     <StyledDetailIssue>
@@ -42,4 +48,10 @@ const StyledDetailIssue = styled.main`
       height: 65px;
     }
   }
+`;
+
+const StyledNotFoundDetailIssue = styled.main`
+  text-align: center;
+  font-weight: 700;
+  color: red;
 `;

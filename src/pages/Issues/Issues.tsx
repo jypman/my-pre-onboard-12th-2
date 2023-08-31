@@ -1,14 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useIssues } from "./useIssues";
-import styled from "styled-components";
 import { getIssues } from "../../api/issues";
 import { Loading } from "../../components/Loading";
 import { IssueList } from "./IssueList";
+import { useInfinityScroll } from "../../hooks/useInfinityScroll";
 
 export const Issues = () => {
   const { issues, setIssues, isNewIssuesLoading, setIsNewIssuesLoading, page } =
     useIssues();
-  const scrollTargetFooter = useRef<HTMLDivElement>(null);
+  const { scrollTargetFooter } = useInfinityScroll(() => {
+    setIsNewIssuesLoading(true);
+  });
 
   const getItems = async () => {
     page.current++;
@@ -17,38 +19,19 @@ export const Issues = () => {
     setIsNewIssuesLoading(false);
   };
 
-  const onIntersect = ([entry]: IntersectionObserverEntry[]) => {
-    if (entry.isIntersecting) {
-      setIsNewIssuesLoading(true);
-    }
-  };
-
   useEffect(() => {
     if (isNewIssuesLoading) {
       getItems();
     }
   }, [isNewIssuesLoading]);
 
-  useEffect(() => {
-    if (!scrollTargetFooter.current) return;
-
-    const observer = new IntersectionObserver(onIntersect, {
-      threshold: 1,
-    });
-
-    observer.observe(scrollTargetFooter.current);
-
-    return () => observer && observer.disconnect();
-  }, [scrollTargetFooter.current, onIntersect]);
+  if (issues.length === 0 && !isNewIssuesLoading)
+    return <main>이슈 목록이 없습니다.</main>;
 
   return (
-    <StyledIssues>
+    <main>
       <IssueList issues={issues} />
       {isNewIssuesLoading ? <Loading /> : <div ref={scrollTargetFooter} />}
-    </StyledIssues>
+    </main>
   );
 };
-
-const StyledIssues = styled.main`
-  //
-`;
