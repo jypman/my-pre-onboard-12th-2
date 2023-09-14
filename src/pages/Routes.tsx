@@ -5,6 +5,7 @@ import { DetailIssue } from "./DetailIssue";
 import { Header } from "../components/Header";
 import { NotFound } from "./NotFound";
 import { DetailIssueProvider } from "../providers/DetailIssueProvider";
+import { IssueListProvider } from "../providers/IssueListProvider";
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +21,9 @@ export const router = createBrowserRouter([
     element: (
       <>
         <Header />
-        <Issues />
+        <IssueListProvider>
+          <Issues />
+        </IssueListProvider>
       </>
     ),
   },

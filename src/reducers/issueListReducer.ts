@@ -10,7 +10,7 @@ type IssueListActionType =
   | "GET_ISSUE_LIST_SUCCESS"
   | "GET_ISSUE_LIST_FAIL";
 
-interface IssueListState {
+export interface IssueListState {
   isLoading: boolean;
   issueList: IResIssue[];
 }
