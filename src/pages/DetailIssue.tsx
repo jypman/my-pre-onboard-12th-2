@@ -31,7 +31,11 @@ export const DetailIssue = () => {
     <StyledDetailIssue>
       <div>
         <div className="thumbnail-content">
-          <img src={detailIssue.issue.user.avatar_url} alt="프로필 이미지" />
+          <img
+            data-testid="user-profile-img"
+            src={detailIssue.issue.user.avatar_url}
+            alt="프로필 이미지"
+          />
           <IssueItem
             title={detailIssue.issue.title}
             number={detailIssue.issue.number}
@@ -41,7 +45,9 @@ export const DetailIssue = () => {
           />
         </div>
       </div>
-      <MarkDown content={detailIssue.issue.body} />
+      <div data-testid="issue-content">
+        <MarkDown content={detailIssue.issue.body} />
+      </div>
     </StyledDetailIssue>
   );
 };
