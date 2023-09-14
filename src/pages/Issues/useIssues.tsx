@@ -1,27 +1,31 @@
-import { useEffect, useRef, useState } from "react";
-import { getIssues, IResIssue } from "../../api/issues";
+import { useRef, useReducer } from "react";
+import { getIssues } from "../../api/issues";
+import { issueListReducer } from "../../reducers/issueListReducer";
+import { handleHttpError } from "../../api/http";
 
 export const useIssues = () => {
-  const [issues, setIssues] = useState<IResIssue[]>([]);
-  const [isNewIssuesLoading, setIsNewIssuesLoading] = useState<boolean>(false);
+  const [issues, dispatch] = useReducer(issueListReducer, {
+    isLoading: false,
+    issueList: [],
+  });
   const page = useRef<number>(1);
   const perPage = 30;
 
-  useEffect(() => {
-    setIsNewIssuesLoading(true);
-    getIssues(page.current, perPage).then((data: IResIssue[]) => {
-      if (data && data.length > 0) {
-        setIssues(data);
-      }
-      setIsNewIssuesLoading(false);
-    });
-  }, []);
+  const updateIssues = async (page: number) => {
+    dispatch({ type: "GET_ISSUE_LIST_REQUEST" });
+    try {
+      const data = await getIssues(page, perPage);
+      if (data && data.length > 0)
+        dispatch({ type: "GET_ISSUE_LIST_SUCCESS", data });
+    } catch (e) {
+      dispatch({ type: "GET_ISSUE_LIST_FAIL" });
+      handleHttpError(e);
+    }
+  };
 
   return {
     issues,
-    setIssues,
-    isNewIssuesLoading,
-    setIsNewIssuesLoading,
+    updateIssues,
     page,
   };
 };
