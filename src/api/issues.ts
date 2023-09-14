@@ -14,12 +14,18 @@ export interface IResIssue {
   comments: number;
   body: string;
 }
+
+type IssuesSortType = "created" | "updated" | "comments";
+type IssuesStateType = "open" | "closed" | "all";
+
 export const getIssues = (
-  page: number,
+  page: number = 1,
   perPage: number = 30,
+  sort: IssuesSortType = "comments",
+  state: IssuesStateType = "open",
 ): Promise<IResIssue[]> => {
   return http.get(
-    `${API.ISSUES}?sort=comments&page=${page}&per_page=${perPage}`,
+    `${API.ISSUES}?sort=${sort}&state=${state}&page=${page}&per_page=${perPage}`,
   );
 };
 
