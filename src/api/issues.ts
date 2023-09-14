@@ -1,4 +1,4 @@
-import instance from "./instance";
+import http from "./http";
 import { API } from "./config";
 
 export interface IResIssue {
@@ -18,7 +18,7 @@ export const getIssues = (
   page: number,
   perPage: number = 30,
 ): Promise<IResIssue[]> => {
-  return instance.get(
+  return http.get(
     `${API.ISSUES}?sort=comments&page=${page}&per_page=${perPage}`,
   );
 };
@@ -26,5 +26,5 @@ export const getIssues = (
 export const getDetailedIssue = (
   issueNumber: number | string,
 ): Promise<IResIssue> => {
-  return instance.get(`${API.ISSUES}/${issueNumber}`);
+  return http.get(`${API.ISSUES}/${issueNumber}`);
 };
