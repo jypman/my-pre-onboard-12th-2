@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const Header = () => {
   return (
     <StyledHeader>
-      <div>8team / pre-onboarding-12th-2-8</div>
+      <div>FaceBook / React</div>
     </StyledHeader>
   );
 };
