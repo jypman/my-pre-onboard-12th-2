@@ -14,7 +14,7 @@ export const IssueList = ({ issues }: IssueListProps) => {
     issueIndex > 0 && issueIndex % AD_EXPOSE_INTERVAL === 0;
 
   return (
-    <section>
+    <section data-testid="issues-wrapper">
       {issues.reduce(
         (acc: React.ReactElement[], issue: IResIssue, issueIndex) => {
           const IssueListComponent: React.ReactElement = (
