@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDetailIssue } from "./useDetailIssue";
 import styled from "styled-components";
@@ -8,11 +8,15 @@ import { Loading } from "../../components/Loading";
 
 export const DetailIssue = () => {
   const { id } = useParams();
-  const { detailIssue, isDetailIssueLoading } = useDetailIssue(id as string);
+  const { detailIssue, initDetailedIssue } = useDetailIssue();
   const dateFormat = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
 
-  if (isDetailIssueLoading) return <Loading />;
-  if (!detailIssue)
+  useEffect(() => {
+    initDetailedIssue(id as string);
+  }, []);
+
+  if (detailIssue.isLoading) return <Loading />;
+  if (!detailIssue.issue)
     return (
       <StyledNotFoundDetailIssue>
         <div>해당 이슈를 찾을 수 없습니다.</div>
@@ -23,17 +27,19 @@ export const DetailIssue = () => {
     <StyledDetailIssue>
       <div>
         <div className="thumbnail-content">
-          <img src={detailIssue.user.avatar_url} alt="프로필 이미지" />
+          <img src={detailIssue.issue.user.avatar_url} alt="프로필 이미지" />
           <IssueItem
-            title={detailIssue.title}
-            number={detailIssue.number}
-            comments={detailIssue.comments}
-            updatedAt={dateFormat.format(new Date(detailIssue.updated_at))}
-            userName={detailIssue.user.login}
+            title={detailIssue.issue.title}
+            number={detailIssue.issue.number}
+            comments={detailIssue.issue.comments}
+            updatedAt={dateFormat.format(
+              new Date(detailIssue.issue.updated_at),
+            )}
+            userName={detailIssue.issue.user.login}
           />
         </div>
       </div>
-      <MarkDown content={detailIssue.body} />
+      <MarkDown content={detailIssue.issue.body} />
     </StyledDetailIssue>
   );
 };
