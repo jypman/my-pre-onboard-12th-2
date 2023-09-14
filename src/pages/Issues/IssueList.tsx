@@ -8,27 +8,32 @@ interface IssueListProps {
 }
 
 export const IssueList = ({ issues }: IssueListProps) => {
-  const indexWhereAdsArePlaced = 4;
+  const AD_EXPOSE_INTERVAL = 4;
+  const isAdSection = (issueIndex: number) =>
+    issueIndex > 0 && issueIndex % AD_EXPOSE_INTERVAL === 0;
   const dateFormat = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
 
   return (
     <section>
-      {issues.reduce((acc: React.ReactElement[], issue: IResIssue, index) => {
-        const IssueListComponent: React.ReactElement = (
-          <IssueItem
-            key={`issue-${issue.id}`}
-            title={issue.title}
-            number={issue.number}
-            comments={issue.comments}
-            updatedAt={dateFormat.format(new Date(issue.updated_at))}
-            userName={issue.user.login}
-          />
-        );
+      {issues.reduce(
+        (acc: React.ReactElement[], issue: IResIssue, issueIndex) => {
+          const IssueListComponent: React.ReactElement = (
+            <IssueItem
+              key={`issue-${issue.id}`}
+              title={issue.title}
+              number={issue.number}
+              comments={issue.comments}
+              updatedAt={dateFormat.format(new Date(issue.updated_at))}
+              userName={issue.user.login}
+            />
+          );
 
-        return index > 0 && index % indexWhereAdsArePlaced === 0
-          ? [...acc, <Ads key={`ads-${issue.id}`} />, IssueListComponent]
-          : [...acc, IssueListComponent];
-      }, [])}
+          return isAdSection(issueIndex)
+            ? [...acc, <Ads key={`ads-${issue.id}`} />, IssueListComponent]
+            : [...acc, IssueListComponent];
+        },
+        [],
+      )}
     </section>
   );
 };
