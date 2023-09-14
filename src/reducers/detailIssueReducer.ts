@@ -9,7 +9,7 @@ type IssueActionType =
   | "GET_ISSUE_SUCCESS"
   | "GET_ISSUE_FAIL";
 
-interface IIssueState {
+export interface IIssueState {
   isLoading: boolean;
   issue: IResIssue | null;
 }

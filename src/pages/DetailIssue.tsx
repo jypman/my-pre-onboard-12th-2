@@ -1,14 +1,18 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useDetailIssue } from "./useDetailIssue";
 import styled from "styled-components";
-import { IssueItem } from "../Issues/IssueItem";
-import { MarkDown } from "../../components/MarkDown";
-import { Loading } from "../../components/Loading";
+import { IssueItem } from "./Issues/IssueItem";
+import { MarkDown } from "../components/MarkDown";
+import { Loading } from "../components/Loading";
+import {
+  useDetailIssueVal,
+  useDetailIssueActions,
+} from "../providers/DetailIssueProvider";
 
 export const DetailIssue = () => {
   const { id } = useParams();
-  const { detailIssue, initDetailedIssue } = useDetailIssue();
+  const detailIssue = useDetailIssueVal();
+  const { initDetailedIssue } = useDetailIssueActions();
   const dateFormat = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
 
   useEffect(() => {
