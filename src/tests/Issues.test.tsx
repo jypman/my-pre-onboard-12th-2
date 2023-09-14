@@ -44,6 +44,10 @@ describe("이슈 목록 페이지", () => {
       </IssueListProvider>,
     );
   });
+  it("이슈 목록 요청 호출 중에 로딩 UI 렌더링", async () => {
+    const loading = screen.getByTestId("loading");
+    expect(loading).toBeInTheDocument();
+  });
   it("이슈 목록 요청로직 호출 완료", () => {
     expect(spyOnIssueList).toHaveBeenCalled();
   });
