@@ -8,12 +8,12 @@ import {
   useDetailIssueVal,
   useDetailIssueActions,
 } from "../providers/DetailIssueProvider";
+import { getDateTimeFormat } from "../utils";
 
 export const DetailIssue = () => {
   const { id } = useParams();
   const detailIssue = useDetailIssueVal();
   const { initDetailedIssue } = useDetailIssueActions();
-  const dateFormat = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
 
   useEffect(() => {
     initDetailedIssue(id as string);
@@ -36,9 +36,7 @@ export const DetailIssue = () => {
             title={detailIssue.issue.title}
             number={detailIssue.issue.number}
             comments={detailIssue.issue.comments}
-            updatedAt={dateFormat.format(
-              new Date(detailIssue.issue.updated_at),
-            )}
+            updatedAt={getDateTimeFormat("ko", detailIssue.issue.updated_at)}
             userName={detailIssue.issue.user.login}
           />
         </div>

@@ -2,6 +2,7 @@ import React from "react";
 import { IResIssue } from "../../api/issues";
 import { IssueItem } from "./IssueItem";
 import { Ads } from "../../components/Ads";
+import { getDateTimeFormat } from "../../utils";
 
 interface IssueListProps {
   issues: IResIssue[];
@@ -11,7 +12,6 @@ export const IssueList = ({ issues }: IssueListProps) => {
   const AD_EXPOSE_INTERVAL = 4;
   const isAdSection = (issueIndex: number) =>
     issueIndex > 0 && issueIndex % AD_EXPOSE_INTERVAL === 0;
-  const dateFormat = new Intl.DateTimeFormat("ko", { dateStyle: "long" });
 
   return (
     <section>
@@ -23,7 +23,7 @@ export const IssueList = ({ issues }: IssueListProps) => {
               title={issue.title}
               number={issue.number}
               comments={issue.comments}
-              updatedAt={dateFormat.format(new Date(issue.updated_at))}
+              updatedAt={getDateTimeFormat("ko", issue.updated_at)}
               userName={issue.user.login}
             />
           );
