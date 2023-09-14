@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useReducer } from "react";
+import { useCallback, useReducer } from "react";
 import { getDetailedIssue } from "../../api/issues";
 import { detailIssueReducer } from "../../reducers/detailIssueReducer";
 import { handleHttpError } from "../../api/http";
