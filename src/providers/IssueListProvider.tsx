@@ -2,9 +2,7 @@ import React, {
   createContext,
   useContext,
   useReducer,
-  useRef,
   useCallback,
-  RefObject,
 } from "react";
 import { issueListReducer, IssueListState } from "../reducers/issueListReducer";
 import { getIssues } from "../api/issues";
@@ -47,7 +45,6 @@ export const IssueListProvider = ({ children }: IssueListProviderProps) => {
     isLoading: false,
     issueList: [],
   });
-  const page = useRef<number>(1);
   const perPage = 30;
 
   const updateIssues = useCallback(async (page: number) => {
