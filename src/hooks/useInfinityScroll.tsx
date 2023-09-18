@@ -19,7 +19,7 @@ export const useInfinityScroll = (onIntersectCallback: Function) => {
     observer.observe(scrollTargetFooter.current);
 
     return () => observer && observer.disconnect();
-  }, [scrollTargetFooter.current, onIntersect]);
+  }, [onIntersect]);
 
   return { scrollTargetFooter };
 };

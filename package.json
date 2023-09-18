@@ -16,7 +16,6 @@
     "react-markdown": "^8.0.7",
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
-    "remark-gfm": "^3.0.1",
     "styled-components": "^6.0.7",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
@@ -24,7 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll --runInBand",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -44,5 +43,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "/node_modules/(?!comma-separated-tokens|space-separated-tokens|hast-util-whitespace|property-information|trim-lines|remark-rehype|remark-parse|trough|is-plain-obj|bail|unified|vfile|react-markdown)"
+    ],
+    "moduleNameMapper": {
+      "react-markdown": "<rootDir>/node_modules/react-markdown/react-markdown.min.js"
+    }
   }
 }

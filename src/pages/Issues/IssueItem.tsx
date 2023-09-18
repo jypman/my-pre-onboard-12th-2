@@ -22,13 +22,18 @@ export const IssueItem = ({
     <StyledIssueList onClick={() => navigate(`/issues/${number}`)}>
       <div>
         <div className="title">
-          #{number} {title}
+          <span data-testid="number">#{number}</span>
+          <br />
+          <span data-testid="title">{title}</span>
         </div>
         <div className="sub-info">
-          작성자: {userName}, 작성일: {updatedAt}
+          <span data-testid="author">작성자: {userName}</span>,
+          <span data-testid="updateAt">작성일: {updatedAt}</span>
         </div>
       </div>
-      <div className="comments">코멘트: {comments}</div>
+      <div className="comments" data-testid="comment">
+        코멘트: {comments}
+      </div>
     </StyledIssueList>
   );
 };

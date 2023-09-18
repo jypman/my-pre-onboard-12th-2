@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export const Loading = () => {
-  return <StyledLoading>로딩중...</StyledLoading>;
+  return <StyledLoading data-testid="loading">로딩중...</StyledLoading>;
 };
 
 const StyledLoading = styled.section`

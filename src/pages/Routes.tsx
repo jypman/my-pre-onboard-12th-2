@@ -1,9 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Home } from "./Home";
 import { Issues } from "./Issues/Issues";
-import { DetailIssue } from "./Issue/DetailIssue";
+import { DetailIssue } from "./DetailIssue";
 import { Header } from "../components/Header";
 import { NotFound } from "./NotFound";
+import { DetailIssueProvider } from "../providers/DetailIssueProvider";
+import { IssueListProvider } from "../providers/IssueListProvider";
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +21,9 @@ export const router = createBrowserRouter([
     element: (
       <>
         <Header />
-        <Issues />
+        <IssueListProvider>
+          <Issues />
+        </IssueListProvider>
       </>
     ),
   },
@@ -28,7 +32,9 @@ export const router = createBrowserRouter([
     element: (
       <>
         <Header />
-        <DetailIssue />
+        <DetailIssueProvider>
+          <DetailIssue />
+        </DetailIssueProvider>
       </>
     ),
   },
