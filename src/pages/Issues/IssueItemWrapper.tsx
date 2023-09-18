@@ -8,7 +8,7 @@ interface IssueListProps {
   issues: IResIssue[];
 }
 
-export const IssueList = ({ issues }: IssueListProps) => {
+export const IssueItemWrapper = ({ issues }: IssueListProps) => {
   const AD_EXPOSE_INTERVAL = 4;
   const isAdSection = (issueIndex: number) =>
     issueIndex > 0 && issueIndex % AD_EXPOSE_INTERVAL === 0;

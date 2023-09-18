@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Loading } from "../../components/Loading";
-import { IssueList } from "./IssueList";
+import { IssueItemWrapper } from "./IssueItemWrapper";
 import { useInfinityScroll } from "../../hooks/useInfinityScroll";
 import {
   useIssueListVal,
@@ -25,7 +25,7 @@ export const Issues = () => {
 
   return (
     <main>
-      <IssueList issues={issueList} />
+      <IssueItemWrapper issues={issueList} />
       {isLoading ? <Loading /> : <div ref={scrollTargetFooter} />}
     </main>
   );
